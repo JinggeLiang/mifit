@@ -1,4 +1,4 @@
-name: 刷步数2
+name: Upload Step(152***)
 
 on:
   push:
@@ -23,8 +23,8 @@ jobs:
       run: |
         pip install requests
         sckey='${{ secrets.SCKEY }}'
-        user='${{ secrets.USER }}'
-        pwd='${{ secrets.PWD }}'
+        user='${{ secrets.USER152 }}'
+        pwd='${{ secrets.PWD152 }}'
         step='${{ secrets.STEP }}'
         
         python3 main.py <<EOF
