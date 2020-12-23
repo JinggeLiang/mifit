@@ -27,7 +27,7 @@ jobs:
         step='${{ secrets.STEP }}'
         sckey='${{ secrets.SCKEY }}'
         
-        python3 main.py <<EOF
+        python3 xiaomi.py <<EOF
         ${user}
         ${password}
         ${step}
@@ -41,7 +41,7 @@ jobs:
         step='${{ secrets.STEP }}'
         sckey='${{ secrets.SCKEY }}'
         
-        python3 main.py <<EOF
+        python3 xiaomi.py <<EOF
         ${user}
         ${password}
         ${step}
