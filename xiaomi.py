@@ -25,7 +25,7 @@ class MiFit:
         :param query: 参数
         :return: 参数对应值
         """
-        queries = urlparse.parse_qs(url)
+        queries = urlparse.parse_qs(url.split("?")[1])
         return queries.get(query)
 
     @staticmethod
