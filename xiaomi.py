@@ -45,28 +45,6 @@ class MiFit:
         print("app_token获取成功！")
         return token_info['app_token']
 
-    @staticmethod
-    def push_wx(sc_key, desp=""):
-        """
-        推送消息到微信
-        """
-        if sc_key == '':
-            print("[注意] 未提供sckey，不进行推送！")
-        else:
-            server_url = f"https://sc.ftqq.com/{sc_key}.send"
-            params = {
-                "text": '小米运动 步数修改',
-                "desp": desp
-            }
-
-            response = requests.get(server_url, params=params)
-            json_data = response.json()
-
-            if json_data['errno'] == 0:
-                print(f"推送成功。")
-            else:
-                print(f"推送失败：{json_data['errno']}({json_data['errmsg']})")
-
     def get_token_info(self):
         url1 = "https://api-user.huami.com/registrations/+86" + self.user + "/tokens"
         headers = {
@@ -139,6 +117,24 @@ class MiFit:
         print(result)
         if self.sc_key:
             self.push_wx(self.sc_key, result)
+
+    def push_wx(self, sc_key, desp=""):
+        """
+        推送消息到微信
+        """
+        server_url = f"https://sc.ftqq.com/{sc_key}.send"
+        params = {
+            "text": f'小米运动 步数修改 {self.user}',
+            "desp": desp
+        }
+
+        response = requests.get(server_url, params=params)
+        json_data = response.json()
+
+        if json_data['errno'] == 0:
+            print(f"推送成功。")
+        else:
+            print(f"推送失败：{json_data['errno']}({json_data['errmsg']})")
 
 
 if __name__ == "__main__":
