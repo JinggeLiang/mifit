@@ -1,1 +1,1 @@
-# 小米运动、乐心健康自动刷步数
+# Mi Fit & Life Sense
