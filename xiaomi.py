@@ -18,7 +18,7 @@ class MiFit:
         self.sc_key = sc_key
 
     @staticmethod
-    def get_url_para(url, query):
+    def get_url_query(url, query):
         """
         获取URL里面的参数值
         :param url: URL
@@ -26,7 +26,9 @@ class MiFit:
         :return: 参数对应值
         """
         queries = urlparse.parse_qs(url.split("?")[1])
-        return queries.get(query)
+        if not queries.get(query):
+            return None
+        return "".join(queries.get(query))
 
     @staticmethod
     def get_app_token(login_token):
@@ -59,7 +61,7 @@ class MiFit:
         }
         response1 = requests.post(url1, data=data1, headers=headers, allow_redirects=False)
         location = response1.headers["Location"]
-        code = MiFit.get_url_para(location, "access")
+        code = MiFit.get_url_query(location, "access")
         if not code:
             raise Exception(f"账号/密码错误，账号:{self.user}, url:{location}")
 
