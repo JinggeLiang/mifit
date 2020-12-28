@@ -48,3 +48,16 @@ jobs:
         ${step}
         ${sckey}
         EOF
+    - name: 更新步数 187***
+      run: |
+        user='${{ secrets.USER187 }}'
+        password='${{ secrets.PWD187 }}'
+        step='${{ secrets.STEP }}'
+        sckey='${{ secrets.SCKEY }}'
+        
+        python3 xiaomi.py <<EOF
+        ${user}
+        ${password}
+        ${step}
+        ${sckey}
+        EOF
