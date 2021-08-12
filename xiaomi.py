@@ -1,9 +1,12 @@
 # -*- coding: utf8 -*-
 
-import requests, time, re, json, random
+import json
+import random
+import re
+import requests
+import time
 
-now = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
-headers = {
+HEADERS = {
     'User-Agent': 'Dalvik/2.1.0 (Linux; U; Android 9; MI 6 MIUI/20.6.18)'
 }
 
@@ -100,7 +103,7 @@ def main(user, passwd, step):
 
     response = requests.post(url, data=data, headers=head).json()
     # print(response)
-    result = f"{user[:4]}****{user[-4:]}: [{now}] 修改步数（{step}）" + response['message']
+    result = f"{user[:3]}****{user[-4:]}: 修改步数（{step}）" + response['message']
     print(result)
     return result
 
@@ -108,7 +111,7 @@ def main(user, passwd, step):
 # 获取时间戳
 def get_time():
     url = 'http://api.m.taobao.com/rest/api3.do?api=mtop.common.getTimestamp'
-    response = requests.get(url, headers=headers).json()
+    response = requests.get(url, headers=HEADERS).json()
     t = response['data']['t']
     return t
 
@@ -116,7 +119,7 @@ def get_time():
 # 获取app_token
 def get_app_token(login_token):
     url = f"https://account-cn.huami.com/v1/client/app_tokens?app_name=com.xiaomi.hm.health&dn=api-user.huami.com%2Capi-mifit.huami.com%2Capp-analytics.huami.com&login_token={login_token}"
-    response = requests.get(url, headers=headers).json()
+    response = requests.get(url, headers=HEADERS).json()
     app_token = response['token_info']['app_token']
     # print("app_token获取成功！")
     # print(app_token)
@@ -141,9 +144,9 @@ def push_wx(sckey, desp=""):
         json_data = response.json()
 
         if json_data['errno'] == 0:
-            print(f"[{now}] 推送成功。")
+            print(f"推送成功。")
         else:
-            print(f"[{now}] 推送失败：{json_data['errno']}({json_data['errmsg']})")
+            print(f"推送失败：{json_data['errno']}({json_data['errmsg']})")
 
 
 # 推送server
@@ -164,9 +167,9 @@ def push_server(sckey, desp=""):
         json_data = response.json()
 
         if json_data['code'] == 0:
-            print(f"[{now}] 推送成功。")
+            print(f"推送成功。")
         else:
-            print(f"[{now}] 推送失败：{json_data['code']}({json_data['message']})")
+            print(f"推送失败：{json_data['code']}({json_data['message']})")
 
 
 # 推送pushplus
@@ -188,9 +191,9 @@ def push_pushplus(token, content=""):
         json_data = response.json()
 
         if json_data['code'] == 200:
-            print(f"[{now}] 推送成功。")
+            print(f"推送成功。")
         else:
-            print(f"[{now}] 推送失败：{json_data['code']}({json_data['message']})")
+            print(f"推送失败：{json_data['code']}({json_data['message']})")
 
 
 # 推送tg
@@ -213,9 +216,9 @@ def push_tg(token, chat_id, desp=""):
         json_data = response.json()
 
         if json_data['ok'] == True:
-            print(f"[{now}] 推送成功。")
+            print(f"推送成功。")
         else:
-            print(f"[{now}] 推送失败：{json_data['error_code']}({json_data['description']})")
+            print(f"推送失败：{json_data['error_code']}({json_data['description']})")
 
 
 # 企业微信推送
@@ -242,9 +245,9 @@ def wxpush(msg, usr, corpid, corpsecret, agentid=1000002):
         res = requests.post(url=req_urls, data=data)
         ret = res.json()
         if ret["errcode"] == 0:
-            print(f"[{now}] 企业微信推送成功")
+            print(f"企业微信推送成功")
         else:
-            print(f"[{now}] 推送失败：{ret['errcode']} 错误信息：{ret['errmsg']}")
+            print(f"推送失败：{ret['errcode']} 错误信息：{ret['errmsg']}")
 
     def get_message(msg, usr):
         data = {
