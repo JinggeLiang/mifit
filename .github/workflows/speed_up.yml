@@ -1,0 +1,24 @@
+name: re-active speedup user
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: 0 2 * * *
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.9
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.9
+    - name: Install dependencies
+      run: |
+        pip install bs4 install cloudscraper
+    - name: Run
+      run: |
+        python3 ./speed_up_main.py <<EOF
+        EOF
