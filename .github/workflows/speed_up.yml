@@ -3,7 +3,7 @@ name: re-active speedup user
 on:
   workflow_dispatch:
   schedule:
-    - cron: 0 2 * * *
+    - cron: 1/30 22 * * *
 
 jobs:
   build:
