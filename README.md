@@ -1,1 +1,1 @@
-# Mi Fit & Life Sense
+# 小米运动
