@@ -278,7 +278,7 @@ def wxpush(msg, usr, corpid, corpsecret, agentid=1000002):
 
 
 if __name__ == "__main__":
-    # Push Mode
+    # 米
     Pm = "off"
     if Pm == 'wx' or Pm == 'nwx':
         # ServerChan
